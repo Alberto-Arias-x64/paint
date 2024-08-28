@@ -20,17 +20,19 @@
       </header>
       <section>
         <aside>
-          <button class="active" title="pen">✏️</button>
-          <button title="erase">🔪</button>
-          <button title="rectangle">🟥</button>
-          <button title="ellipse">⭕</button>
-          <button title="picker">⛏️</button>
+          <button class="active" title="draw">✏️</button>
+          <!-- <button title="erase">🔪</button> -->
+          <button title="rect">🟥</button>
+          <button title="circle">⭕</button>
+          <!-- <button title="picker">⛏️</button> -->
+          <button title="line">📏</button>
           <button title="clear">🗑️</button>
         </aside>
         <canvas id="canvas" width="800" height="600"></canvas>
       </section>
       <footer>
         <input type="color" id="color-picker" />
+        <input type="range" id="brush-size" min="1" max="5" value="1" />
       </footer>
     </main>
   </body>

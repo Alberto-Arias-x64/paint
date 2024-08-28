@@ -1,6 +1,7 @@
 const canvas = document.querySelector('#canvas')
 const ctx = canvas.getContext('2d')
 const color = document.querySelector('#color-picker')
+const size = document.querySelector('#brush-size')
 const clearButton = document.querySelector('[title=clear]')
 const MODES = {
   DRAW: 'draw',
@@ -8,7 +9,9 @@ const MODES = {
   FILL: 'fill',
   RECT: 'rect',
   CIRCLE: 'circle',
-  LINE: 'line'
+  LINE: 'line',
+  PICKER: 'picker',
+  CLEAR: 'clear'
 }
 
 let isDrawing = false
@@ -37,11 +40,26 @@ canvas.addEventListener('mousemove', ({ offsetX, offsetY }) => {
   ctx.moveTo(lastX, lastY)
   ctx.lineTo(offsetX, offsetY)
   ctx.strokeStyle = color.value
-  ctx.lineWidth = 2
+  ctx.lineWidth = size.value
   ctx.stroke()
   ;[lastX, lastY] = [offsetX, offsetY]
 })
 
 clearButton.addEventListener('click', () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
+  setTimeout(() => clearButton.classList.remove('active'), 10)
+})
+
+const buttons = document.querySelector('aside').querySelectorAll('button')
+buttons.forEach(button => {
+  button.addEventListener('click', ({ target: { title } }) => {
+    buttons.forEach(button => button.classList.remove('active'))
+    button.classList.add('active')
+    if (title.includes(MODES.DRAW)) mode = MODES.DRAW
+    else if (title.includes(MODES.ERASE)) mode = MODES.ERASE
+    else if (title.includes(MODES.FILL)) mode = MODES.FILL
+    else if (title.includes(MODES.RECT)) mode = MODES.RECT
+    else if (title.includes(MODES.CIRCLE)) mode = MODES.CIRCLE
+    else if (title.includes(MODES.LINE)) mode = MODES.LINE
+  })
 })
