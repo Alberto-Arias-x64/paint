@@ -1,6 +1,7 @@
 const canvas = document.querySelector('#canvas')
 const ctx = canvas.getContext('2d')
 const color = document.querySelector('#color-picker')
+const clearButton = document.querySelector('[title=clear]')
 const MODES = {
   DRAW: 'draw',
   ERASE: 'erase',
@@ -39,4 +40,8 @@ canvas.addEventListener('mousemove', ({ offsetX, offsetY }) => {
   ctx.lineWidth = 2
   ctx.stroke()
   ;[lastX, lastY] = [offsetX, offsetY]
+})
+
+clearButton.addEventListener('click', () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
 })

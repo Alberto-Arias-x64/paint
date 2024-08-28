@@ -23,10 +23,30 @@ header {
     }
   }
 }
-footer {
-  background: silver;
-  padding: 2px;
+aside {
+  width: max-content;
+  background-color: silver;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  button {
+    height: 24px;
+    width: 24px;
+    background-color: silver;
+    border: 1.5px solid white;
+    border-right-color: black;
+    border-bottom-color: black;
+    cursor: pointer;
+    &:active, &.active {
+      border-color: black;
+      border-right-color: white;
+      border-bottom-color: white;
+    }
+  }
 }
 canvas {
   background-color: #fafafa;
+}
+footer {
+  background: silver;
+  padding: 2px;
 }
