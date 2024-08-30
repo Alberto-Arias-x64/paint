@@ -36,13 +36,24 @@ canvas.addEventListener('mouseleave', () => {
 
 canvas.addEventListener('mousemove', ({ offsetX, offsetY }) => {
   if (!isDrawing) return
-  ctx.beginPath()
-  ctx.moveTo(lastX, lastY)
-  ctx.lineTo(offsetX, offsetY)
-  ctx.strokeStyle = color.value
-  ctx.lineWidth = size.value
-  ctx.stroke()
-  ;[lastX, lastY] = [offsetX, offsetY]
+  if (mode === MODES.PICKER) return
+  if (mode === MODES.LINE) {
+    ctx.beginPath()
+    ctx.moveTo(lastX, lastY)
+    ctx.lineTo(offsetX, offsetY)
+    ctx.strokeStyle = color.value
+    ctx.lineWidth = size.value
+    ctx.stroke()
+    ;[lastX, lastY] = [offsetX, offsetY]
+  }
+  if (mode === MODES.RECT) {
+    ctx.beginPath()
+    ctx.rect(lastX, lastY, offsetX - lastX, offsetY - lastY)
+    ctx.strokeStyle = color.value
+    ctx.lineWidth = size.value
+    ctx.stroke()
+    ;[lastX, lastY] = [offsetX, offsetY]
+  }
 })
 
 clearButton.addEventListener('click', () => {
@@ -53,7 +64,7 @@ clearButton.addEventListener('click', () => {
 const buttons = document.querySelector('aside').querySelectorAll('button')
 buttons.forEach(button => {
   button.addEventListener('click', ({ target: { title } }) => {
-    buttons.forEach(button => button.classList.remove('active'))
+    if (!title.includes(MODES.ERASE)) buttons.forEach(button => button.classList.remove('active'))
     button.classList.add('active')
     if (title.includes(MODES.DRAW)) mode = MODES.DRAW
     else if (title.includes(MODES.ERASE)) mode = MODES.ERASE
