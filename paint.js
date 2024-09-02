@@ -74,3 +74,13 @@ buttons.forEach(button => {
     else if (title.includes(MODES.LINE)) mode = MODES.LINE
   })
 })
+/* rectangle */
+canvas.addEventListener('mousedown', ({ offsetX, offsetY }) => {
+  if (mode !== MODES.RECT) return
+  ctx.beginPath()
+  ctx.rect(lastX, lastY, offsetX - lastX, offsetY - lastY)
+  ctx.strokeStyle = color.value
+  ctx.lineWidth = size.value
+  ctx.stroke()
+  ;[lastX, lastY] = [offsetX, offsetY]
+})
