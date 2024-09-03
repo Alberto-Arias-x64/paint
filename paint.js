@@ -84,3 +84,12 @@ canvas.addEventListener('mousedown', ({ offsetX, offsetY }) => {
   ctx.stroke()
   ;[lastX, lastY] = [offsetX, offsetY]
 })
+/* circle */
+canvas.addEventListener('mousedown', ({ offsetX, offsetY }) => {
+  if (mode !== MODES.CIRCLE) return
+  ctx.beginPath()
+  ctx.arc(offsetX, offsetY, size.value, 0, Math.PI * 2)
+  ctx.strokeStyle = color.value
+  ctx.lineWidth = size.value
+  ctx.stroke()
+})
