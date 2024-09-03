@@ -93,3 +93,14 @@ canvas.addEventListener('mousedown', ({ offsetX, offsetY }) => {
   ctx.lineWidth = size.value
   ctx.stroke()
 })
+/* line */
+canvas.addEventListener('mousedown', ({ offsetX, offsetY }) => {
+  if (mode !== MODES.LINE) return
+  ctx.beginPath()
+  ctx.moveTo(lastX, lastY)
+  ctx.lineTo(offsetX, offsetY)
+  ctx.strokeStyle = color.value
+  ctx.lineWidth = size.value
+  ctx.stroke()
+  ;[lastX, lastY] = [offsetX, offsetY]
+})
