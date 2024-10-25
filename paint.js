@@ -37,7 +37,7 @@ canvas.addEventListener('mouseleave', () => {
 canvas.addEventListener('mousemove', ({ offsetX, offsetY }) => {
   if (!isDrawing) return
   if (mode === MODES.PICKER) return
-  if (mode === MODES.LINE) {
+  if (mode === MODES.DRAW) {
     ctx.beginPath()
     ctx.moveTo(lastX, lastY)
     ctx.lineTo(offsetX, offsetY)
